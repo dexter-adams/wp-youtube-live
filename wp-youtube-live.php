@@ -146,10 +146,10 @@ function get_youtube_live_content( $request_options ) {
             echo $youtube_live->embedCode();
         } elseif ( $request_options['fallback_behavior'] === 'playlist' ) {
             add_filter( 'oembed_result', 'wp_ytl_add_player_attributes_result', 10, 3 );
-            echo wp_oembed_get( esc_attr( $youtube_options['fallback_playlist'] ), $player_args );
-        } elseif ( $request_options['fallback_behavior'] === 'video' && isset( $youtube_options['fallback_video'] ) ) {
+            echo wp_oembed_get( esc_attr( $request_options['fallback_playlist'] ), $player_args );
+        } elseif ( $request_options['fallback_behavior'] === 'video' && isset( $request_options['fallback_video'] ) ) {
             add_filter( 'oembed_result', 'wp_ytl_add_player_attributes_result', 10, 3 );
-            echo wp_oembed_get( esc_attr( $youtube_options['fallback_video'] ), $player_args );
+            echo wp_oembed_get( esc_attr( $request_options['fallback_video'] ), $player_args );
         } elseif ( $request_options['fallback_behavior'] === 'message' && $request_options['fallback_message'] !== 'no_message' ) {
             echo apply_filters( 'wp_youtube_live_no_stream_available', $request_options['fallback_message'] );
         }
